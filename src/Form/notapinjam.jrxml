@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="545" pageHeight="280" columnWidth="505" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="2c640330-0c09-4fd4-816b-11557ef65fef">
+	<property name="ireport.zoom" value="1.464100000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="kode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from relasiperpus where kode_pinjam= $P{kode}
+]]>
+	</queryString>
+	<field name="kode_pinjam" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_anggota" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kelas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jk" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kode_buku" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="judul" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pengarang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="penerbit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tahun_terbit" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kategori" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stok_buku" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_pinjam" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_kembali" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jumlah_pinjam" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ket" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desk" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="denda" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="174" y="0" width="156" height="20" uuid="bfd11e40-d091-4f82-b581-2085636546c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[NOTA PEMINJAMAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="20" width="236" height="24" uuid="851b0521-6f2f-42f7-8a72-92fe3c148aa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[PERPUSTAKAAN ROYAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="44" width="382" height="20" uuid="9836d4f8-f8a7-4d8f-a361-a762a646add2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Jl. Prof. H.M. Yamin No. 173, Kisaran Naga Kec. Kisaran Timur Kab. Asahan Sumatera Utara 21222]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="505" height="1" uuid="61ac5961-d76e-4941-af20-4b5ed7c4459d"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19">
+			<line>
+				<reportElement x="0" y="0" width="505" height="1" uuid="0950e7bf-c918-4a9f-9407-7f33e2567841"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="157" splitType="Stretch">
+			<textField>
+				<reportElement x="91" y="0" width="100" height="20" uuid="9bb54a45-8eee-4186-a388-b75648108c69"/>
+				<textFieldExpression><![CDATA[$F{kode_pinjam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="0" width="86" height="20" uuid="7c5c48c2-e83f-439f-8d05-65311af6e03b"/>
+				<text><![CDATA[kode Pinjam	:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="40" width="86" height="20" uuid="b10d6ef8-760e-44df-98be-5d7f48297e70"/>
+				<text><![CDATA[Id Anggota	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="40" width="100" height="20" uuid="f7eb5c45-99da-41b1-8af1-6aa4d66ed690"/>
+				<textFieldExpression><![CDATA[$F{id_anggota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="20" width="86" height="20" uuid="aee7f566-561f-46f6-92ae-002dde4a654c"/>
+				<text><![CDATA[Nama		:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="20" width="100" height="20" uuid="b72d228a-0f69-4c19-8d99-593d709276f2"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="85" width="71" height="20" uuid="4c4ba8e3-c595-41aa-90fe-9a253f1e2a60"/>
+				<text><![CDATA[Kode Buku]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="115" width="71" height="20" uuid="2bc04ade-1ea9-4dec-90c7-6eab863ad11e"/>
+				<textFieldExpression><![CDATA[$F{kode_buku}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="86" y="85" width="100" height="20" uuid="595273e8-17c2-4145-8a8b-e3bb635183b2"/>
+				<text><![CDATA[Judul Buku]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="115" width="100" height="20" uuid="ee8260db-f005-4687-9876-e5f0e29f0d6a"/>
+				<textFieldExpression><![CDATA[$F{judul}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="85" width="100" height="20" uuid="b73da5f6-7019-4098-9bb9-9afe97211b6f"/>
+				<text><![CDATA[Tgl Pinjam]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="115" width="100" height="20" uuid="aa143906-cde2-4474-a965-1ec7335a3c42"/>
+				<textFieldExpression><![CDATA[$F{tgl_pinjam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="85" width="100" height="20" uuid="b860aacd-5de7-458f-bafb-dad903a4a757"/>
+				<text><![CDATA[Tgl Kembali]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="115" width="100" height="20" uuid="485dfb95-7760-4ca8-877e-3e1c878aa114"/>
+				<textFieldExpression><![CDATA[$F{tgl_kembali}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="143" width="214" height="11" uuid="e2eb1050-eb1f-422a-b408-3d82f7b33b94"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Catatan: Jika telat akan dikenakan denda Rp 2000/Hari.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="135" width="505" height="1" uuid="099033af-9278-4d2f-ac58-f34f4c49b951"/>
+			</line>
+			<line>
+				<reportElement x="0" y="74" width="505" height="1" uuid="593eda64-3d3a-4b09-8f9a-7f5097c95fd8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="105" width="505" height="1" uuid="15d1f2b2-6b63-4373-8c21-69e3862f4f1b"/>
+			</line>
+			<line>
+				<reportElement x="505" y="-82" width="1" height="217" uuid="46da0275-43b3-4a92-939f-62c6dbce52f8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-82" width="1" height="217" uuid="e3cb7aac-f072-4810-8506-0d8f9fc35c20"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

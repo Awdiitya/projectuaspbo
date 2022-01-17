@@ -1,0 +1,660 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Form;
+
+import java.sql.PreparedStatement;
+import koneksi.koneksiDB;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author Acer
+ */
+public class Pengembalian extends javax.swing.JFrame {
+    public String tglp;
+    public String tglk;
+    public String tgl;
+    private String sql;
+    private PreparedStatement ps=null;
+    /**
+     * Creates new form Pengembalian
+     */
+    public Pengembalian() {
+        initComponents();
+        setLocationRelativeTo(this);
+        tampilkanDataPinjam();
+        bersih();
+    }
+    
+    private void tampilkanDataPinjam() {
+        try {
+            String sql="select * from relasiperpus";
+            PreparedStatement ps=null;
+            Object[]row={"Kode Pinjam","Id Anggota","Nama","Kode Buku","Judul Buku","Tgl Pinjam","Tgl Kembali","Keterangan","Denda","Ulasan"};
+            DefaultTableModel dtm=new DefaultTableModel(null,row);
+            TblPinjam.setModel(dtm);
+            jScrollPane4.setEnabled(true);
+            jScrollPane4.setBorder(null);
+            jScrollPane4.setViewportView(TblPinjam);
+            ResultSet rs=null;
+            ps=koneksiDB.ambilkoneksidatabase().prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()) {
+                String pinjam=rs.getString(1);
+                String id=rs.getString(2);
+                String nama=rs.getString(3);
+                String buku=rs.getString(9);
+                String judul=rs.getString(10);
+                String tglp=rs.getString(16);
+                String tglk=rs.getString(17);
+                String ket=rs.getString(19);
+                String desk=rs.getString(20);
+                String denda=rs.getString(21);
+                String [] baris={pinjam,id,nama,buku,judul,tglp,tglk,desk,denda,ket};
+                dtm.addRow(baris);
+            }
+        } catch (Exception e){}
+    }
+
+         private void bersih(){
+        tfKodePinjam.setText("");
+        tfKodePinjam.setEditable(true);
+        tfId.setText("");
+        tfId.setEditable(true);
+        tfNama.setText("");
+         tfNama.setEditable(true);
+        tfKodeBuku.setText("");
+        tfKodeBuku.setEditable(true);
+        tfJudul.setText("");
+        tfJudul.setEditable(true);
+        jDatePinjam.setDate(null);
+        jDateKembali.setDate(null);
+        jDatePinjam.setEnabled(true);
+        jDateKembali.setEnabled(true);
+        cmbKet.setSelectedItem("--Pilih--");
+        tfDenda.setText("");
+        tfCariDataPinjam.setText("");
+        tampilkanDataPinjam();
+    }
+         
+         private void CariDataPinjam() {
+        try {
+            String cari=tfCariDataPinjam.getText();
+            String sql="select * from relasiperpus where kode_pinjam like'%"+cari+"%' or id_anggota like'%"+cari+"%' or nama like'%"+cari+"%' or kode_buku like'%"+cari+"%' or judul like'%"+cari+"%' order by tgl_pinjam desc";
+            PreparedStatement ps=null;
+            Object[]row={"Kode Pinjam","Id Anggota","Nama","Kode Buku","Judul Buku","Tgl Pinjam","Tgl Kembali","Keterangan","Denda","Ulasan"};
+            DefaultTableModel dtm=new DefaultTableModel(null,row);
+            TblPinjam.setModel(dtm);
+            jScrollPane4.setEnabled(true);
+            jScrollPane4.setBorder(null);
+            jScrollPane4.setViewportView(TblPinjam);
+            ResultSet rs=null;
+            ps=koneksi.koneksiDB.ambilkoneksidatabase().prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                String pinjam=rs.getString(1);
+                String id=rs.getString(2);
+                String nama=rs.getString(3);
+                String buku=rs.getString(9);
+                String judul=rs.getString(10);
+                String tglp=rs.getString(16);
+                String tglk=rs.getString(17);
+                String ket=rs.getString(19);
+                String desk=rs.getString(20);
+                String denda=rs.getString(21);
+                String [] baris={pinjam,id,nama,buku,judul,tglp,tglk,desk,denda,ket};
+                dtm.addRow(baris);
+            }
+            
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Data yang anda cari tidak dapat ditemukan !" +e.getMessage());
+        }
+    }
+ 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel7 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        tfKodePinjam = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel14 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        tfNama = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        tfJudul = new javax.swing.JTextField();
+        jSeparator9 = new javax.swing.JSeparator();
+        lable = new javax.swing.JLabel();
+        jSeparator10 = new javax.swing.JSeparator();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        tfId = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        tfDenda = new javax.swing.JTextField();
+        jSeparator14 = new javax.swing.JSeparator();
+        btnKembali = new javax.swing.JButton();
+        btnPerpanjang = new javax.swing.JButton();
+        jDatePinjam = new com.toedter.calendar.JDateChooser();
+        jDateKembali = new com.toedter.calendar.JDateChooser();
+        tfKodeBuku = new javax.swing.JTextField();
+        cmbKet = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnCekKeterangan = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        tfCariDataPinjam = new javax.swing.JTextField();
+        jSeparator15 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TblPinjam = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
+        background2 = new javax.swing.JLabel();
+        background1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel13.setText("Kode Pinjam");
+        jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        tfKodePinjam.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfKodePinjam.setForeground(new java.awt.Color(28, 42, 57));
+        tfKodePinjam.setBorder(null);
+        jPanel7.add(tfKodePinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 290, -1));
+
+        jSeparator6.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, 10));
+
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel14.setText("ID Anggota");
+        jPanel7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
+
+        jSeparator7.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 290, 10));
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel15.setText("Nama");
+        jPanel7.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        tfNama.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfNama.setForeground(new java.awt.Color(28, 42, 57));
+        tfNama.setBorder(null);
+        tfNama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaActionPerformed(evt);
+            }
+        });
+        jPanel7.add(tfNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 280, -1));
+
+        jSeparator8.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 290, 10));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel16.setText("Kode Buku");
+        jPanel7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 90, -1));
+
+        tfJudul.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfJudul.setForeground(new java.awt.Color(28, 42, 57));
+        tfJudul.setBorder(null);
+        jPanel7.add(tfJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 280, -1));
+
+        jSeparator9.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 290, 10));
+
+        lable.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lable.setForeground(new java.awt.Color(28, 42, 57));
+        lable.setText("Judul Buku");
+        jPanel7.add(lable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 80, -1));
+
+        jSeparator10.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 290, 10));
+
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel18.setText("Tgl. Pinjam");
+        jPanel7.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel20.setText("Tgl. Dikembalikan");
+        jPanel7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 130, -1));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel19.setText("Keterangan");
+        jPanel7.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 90, -1));
+
+        tfId.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfId.setForeground(new java.awt.Color(28, 42, 57));
+        tfId.setBorder(null);
+        jPanel7.add(tfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 280, -1));
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(28, 42, 57));
+        jLabel21.setText("Denda");
+        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 60, -1));
+
+        tfDenda.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfDenda.setForeground(new java.awt.Color(28, 42, 57));
+        tfDenda.setBorder(null);
+        jPanel7.add(tfDenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 180, -1));
+
+        jSeparator14.setForeground(new java.awt.Color(28, 42, 57));
+        jPanel7.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 290, 10));
+
+        btnKembali.setBackground(new java.awt.Color(102, 102, 255));
+        btnKembali.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnKembali.setForeground(new java.awt.Color(255, 255, 255));
+        btnKembali.setText("Kembalikan");
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKembaliActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 110, 40));
+
+        btnPerpanjang.setBackground(new java.awt.Color(102, 102, 255));
+        btnPerpanjang.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnPerpanjang.setForeground(new java.awt.Color(255, 255, 255));
+        btnPerpanjang.setText("Perpanjang");
+        btnPerpanjang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerpanjangActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnPerpanjang, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 110, 40));
+
+        jDatePinjam.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDatePinjamPropertyChange(evt);
+            }
+        });
+        jPanel7.add(jDatePinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 120, 20));
+
+        jDateKembali.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateKembaliPropertyChange(evt);
+            }
+        });
+        jPanel7.add(jDateKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 130, -1));
+
+        tfKodeBuku.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        tfKodeBuku.setForeground(new java.awt.Color(28, 42, 57));
+        tfKodeBuku.setBorder(null);
+        jPanel7.add(tfKodeBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 280, -1));
+
+        cmbKet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Tidak telat", "Telat", "Hilang" }));
+        jPanel7.add(cmbKet, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 140, -1));
+
+        jLabel1.setText("Rp.");
+        jPanel7.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, 20));
+
+        btnCekKeterangan.setText("Cek");
+        btnCekKeterangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekKeteranganActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnCekKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 60, -1));
+
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, 510));
+
+        jLabel25.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Cari Data Peminjam");
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 150, 20));
+
+        tfCariDataPinjam.setBorder(null);
+        tfCariDataPinjam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCariDataPinjamActionPerformed(evt);
+            }
+        });
+        tfCariDataPinjam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCariDataPinjamKeyReleased(evt);
+            }
+        });
+        getContentPane().add(tfCariDataPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 150, 20));
+        getContentPane().add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 150, 10));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/library.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 960, 40));
+
+        TblPinjam.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
+            }
+        ));
+        TblPinjam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblPinjamMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(TblPinjam);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 960, 250));
+
+        btnRefresh.setBackground(new java.awt.Color(0, 204, 0));
+        btnRefresh.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 90, 40));
+
+        btnExit.setBackground(new java.awt.Color(255, 0, 0));
+        btnExit.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 530, 80, 40));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 204, 255));
+        jLabel2.setText("Form Pengembalian Buku");
+        jPanel2.add(jLabel2);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 420, 50));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bunga.jpg"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 380, 600));
+
+        background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bunga.jpg"))); // NOI18N
+        getContentPane().add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 680, 600));
+
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bunga.jpg"))); // NOI18N
+        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 600));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+    private void tfNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaActionPerformed
+    }//GEN-LAST:event_tfNamaActionPerformed
+
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+      try {  
+             sql="update tb_pinjam set tgl_kembali= '"+tglk+"',desk= '"+cmbKet.getSelectedItem()+"',denda= '"+tfDenda.getText()+"',ket='Sudah kembali' where kode_pinjam= '"+tfKodePinjam.getText()+"'";
+                    ps=koneksi.koneksiDB.ambilkoneksidatabase().prepareStatement(sql);
+                    ps.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(rootPane,"Buku telah dikembalikan !");
+                    
+                    String sqlC="update tb_anggota set status='Tidak pinjam' where id_anggota='"+tfId.getText()+"'";
+                     ps=koneksiDB.ambilkoneksidatabase().prepareStatement(sql);
+                    ps.executeUpdate(sqlC);
+                     tampilkanDataPinjam();
+                    bersih();
+         } catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Cek Lagi Sistem"+e.getMessage());
+        }
+    }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void btnPerpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerpanjangActionPerformed
+            try {
+                sql = "UPDATE tb_pinjam SET tgl_pinjam='"+ tglp+"', tgl_kembali='"+tglk+"',ket='Belum kembali' WHERE kode_pinjam='"+ tfKodePinjam.getText() +"' ";
+                ps=koneksi.koneksiDB.ambilkoneksidatabase().prepareStatement(sql);
+                ps.executeUpdate(sql);
+                int a = Integer.valueOf(tfDenda.getText());
+                if(a > 0){
+                    JOptionPane.showMessageDialog(null,"Berhasil di perpanjang dan dikenakan denda sebesar Rp."+ tfDenda.getText() +"");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Berhasil di perpanjang");
+                }
+                bersih();
+                tampilkanDataPinjam();
+              //   waktu();
+            } catch (Exception e) {
+               JOptionPane.showMessageDialog(null,"Terjadi Kesalahan !","Error", JOptionPane.ERROR_MESSAGE);  
+                bersih();
+        }
+    }//GEN-LAST:event_btnPerpanjangActionPerformed
+
+    private void jDatePinjamPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDatePinjamPropertyChange
+          try {
+            if(jDatePinjam.getDate()!=null) {
+                String ubahtanggal="yyyy/MM/dd";
+                SimpleDateFormat fp=new SimpleDateFormat(ubahtanggal);
+                tglp=String.valueOf(fp.format(jDatePinjam.getDate()));
+            }
+            }catch(Exception e){  }
+    }//GEN-LAST:event_jDatePinjamPropertyChange
+
+    private void jDateKembaliPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateKembaliPropertyChange
+        // TODO add your handling code here:
+       try {
+            if(jDateKembali.getDate()!=null) {
+                String ubahtanggal="yyyy/MM/dd";
+                SimpleDateFormat fk=new SimpleDateFormat(ubahtanggal);
+                tglk=String.valueOf(fk.format(jDateKembali.getDate()));
+            }
+            }catch(Exception e){  }
+    }//GEN-LAST:event_jDateKembaliPropertyChange
+
+    private void tfCariDataPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCariDataPinjamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCariDataPinjamActionPerformed
+
+    private void tfCariDataPinjamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCariDataPinjamKeyReleased
+        CariDataPinjam();
+    }//GEN-LAST:event_tfCariDataPinjamKeyReleased
+
+    private void TblPinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblPinjamMouseClicked
+         int row = TblPinjam.getSelectedRow();
+        tfKodePinjam.setText(TblPinjam.getModel().getValueAt(row,0).toString());
+        tfId.setText(TblPinjam.getModel().getValueAt(row,1).toString());
+        tfNama.setText(TblPinjam.getModel().getValueAt(row,2).toString());
+        tfKodeBuku.setText(TblPinjam.getModel().getValueAt(row,3).toString());
+        tfJudul.setText(TblPinjam.getModel().getValueAt(row,4).toString());
+        
+        //untuk tgl pinjam
+        String tglp=(String) TblPinjam.getModel().getValueAt(row,5);
+        try{
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date p = format.parse(tglp);
+            jDatePinjam.setDate(p);
+        }catch(ParseException ex){}
+        
+        //untuk tgl kembali
+//        String tglk=(String) TblPinjam.getModel().getValueAt(row,6);
+//        try{
+//            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date k = format.parse(tglk);
+//            jDateKembali.setDate(k);
+//        }catch(ParseException ex){}
+        
+        cmbKet.setSelectedItem(TblPinjam.getModel().getValueAt(row,7).toString());
+//        tfDenda.setText(TblPinjam.getModel().getValueAt(row,8).toString());
+        String denda="0";
+        if(denda.equals(TblPinjam.getValueAt(row, 8))){
+            tfDenda.setText("");
+        }else
+         tfDenda.setText(TblPinjam.getModel().getValueAt(row,8).toString());
+    }//GEN-LAST:event_TblPinjamMouseClicked
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        tampilkanDataPinjam();
+        bersih();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int keluar=JOptionPane.showConfirmDialog(rootPane, "Keluar Program?","Exit",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(keluar==JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnCekKeteranganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekKeteranganActionPerformed
+        // TODO add your handling code here:
+        try{
+        if(jDateKembali.getDate()==null){
+            JOptionPane.showMessageDialog(rootPane, "Silahkan Input Tanggal Kembali terlebih dahulu");
+        }else{
+            int bayar_denda = 2000;
+            String ubahtanggal="yyyy/MM/dd";
+            SimpleDateFormat format=new SimpleDateFormat(ubahtanggal);
+                Date tanggalpinjam = format.parse(tglp);
+                Date tanggalkembali = format.parse(tglk);
+                long tanggalpinjam1 = tanggalpinjam.getTime();
+                long tanggalkembali1 = tanggalkembali.getTime();
+                long dnd = tanggalkembali1 - tanggalpinjam1;
+            if (TimeUnit.MILLISECONDS.toDays(dnd)>7){
+                cmbKet.setSelectedItem("Telat");
+                tfDenda.setText(String.valueOf((TimeUnit.MILLISECONDS.toDays(dnd)-7)*bayar_denda));
+            }else{
+                cmbKet.setSelectedItem("Tidak telat");
+                tfDenda.setText(String.valueOf(TimeUnit.MILLISECONDS.toDays(dnd)*0));
+            }
+          }
+        } catch (Exception e){ }  
+    }//GEN-LAST:event_btnCekKeteranganActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Pengembalian().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TblPinjam;
+    private javax.swing.JLabel background;
+    private javax.swing.JLabel background1;
+    private javax.swing.JLabel background2;
+    private javax.swing.JButton btnCekKeterangan;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnPerpanjang;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JComboBox<String> cmbKet;
+    public com.toedter.calendar.JDateChooser jDateKembali;
+    public com.toedter.calendar.JDateChooser jDatePinjam;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel lable;
+    private javax.swing.JTextField tfCariDataPinjam;
+    private javax.swing.JTextField tfDenda;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfJudul;
+    private javax.swing.JTextField tfKodeBuku;
+    private javax.swing.JTextField tfKodePinjam;
+    private javax.swing.JTextField tfNama;
+    // End of variables declaration//GEN-END:variables
+}

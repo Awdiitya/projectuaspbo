@@ -1,0 +1,103 @@
+============
+| dbperpus |
+============
+
+tb_buku
+----------
+kode_buku varchar (5) primary key
+judul varchar (80)
+pengarang varchar (50)
+penerbit varchar (50)
+tahun_terbit int (4)
+kategori varchar(20)
+stok-buku int(3)
+
+tb_anggota
+--------------
+id_anggota int(8) primary key
+nama varchar(40)
+kelas varchar(5)
+jk enum(Laki-laki, Perempuan)
+telp varchar(13)
+alamat varchar(50)
+status enum(Pinjam, Tidak Pinjam)
+
+tb_pinjam
+------------
+kode_pinjam int(5) primary, AI
+id_anggota int(8)
+kode_buku varchar (5)
+tgl_pinjam date
+tgl_kembali date
+jumlah_pinjam enum('1')
+ket enum(Sudah kembali, Belum kembali)
+desk enum(Telat, Tidak telat, Hilang, -)
+denda double
+
+relasiperpus
+--------------------
+create view relasiperpus as
+select
+`tb_pinjam`.`kode_pinjam`,
+`tb_pinjam`.`id_anggota`,
+`tb_anggota`.`nama`,
+`tb_anggota`.`kelas`,
+`tb_anggota`.`jk`,
+`tb_anggota`.`telp`,
+`tb_anggota`.`alamat`,
+`tb_anggota`.`status`,
+`tb_pinjam`.`kode_buku`,
+`tb_buku`.`judul`,
+`tb_buku`.`pengarang`,
+`tb_buku`.`penerbit`,
+`tb_buku`.`tahun_terbit`,
+`tb_buku`.`kategori`,
+`tb_buku`.`stok_buku`,
+`tb_pinjam`.`tgl_pinjam`,
+`tb_pinjam`.`tgl_kembali`,
+`tb_pinjam`.`jumlah_pinjam`,
+`tb_pinjam`.`ket`,
+`tb_pinjam`.`desk`,
+`tb_pinjam`.`denda`
+
+from `tb_pinjam`,`tb_anggota`,`tb_buku`
+where `tb_pinjam`.`id_anggota`=`tb_anggota`.`id_anggota`
+and `tb_pinjam`.`kode_buku`=`tb_buku`.`kode_buku`;
+
+form pinjam
+------------------
+insert tb_pinjam
+--------
+kode pinjam
+id anggota
+-nama anggota
+-kelas
+kode buku 
+--judul
+---pengarang
+stok
+jumlah_pinjam 1
+tgl_pinjam
+tgl_kembali
++++ket Belum kembali
++++desk	-
++++denda 0
+
+form kembali
+-------------------
+insert tb_pinjam
+-------------------
+kode_pinjam
+id_anggota
+--nama
+kode-buku
+--judul
+tgl pinjam
+tgl kembali
+++desk 
+````jika telat denda berapa
+```jiika tidak telat denda 0
+````jika hilang denda berapa
+++denda
+
+
